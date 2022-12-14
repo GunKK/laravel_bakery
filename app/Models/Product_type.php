@@ -11,6 +11,7 @@ class Product_type extends Model
     protected $table = 'type_products';
 
     public function product() {
-        return $this->hasMany('App\ProductType', 'id_type', 'id');
+        // return $this->hasMany('App\Product', 'id_type', 'id');
+        return $this->hasMany(Product::class, 'id_type', 'id');
     }
 }

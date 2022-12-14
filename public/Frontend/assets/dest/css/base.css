@@ -6,7 +6,9 @@
   z-index: 100000000;
 }
 .cart-body{
-	z-index:999;
+	z-index: 10;
+  max-height: 50vh;
+  overflow-y: scroll;
 }
 .inner-header{
 	background-color: #ffffff

@@ -11,7 +11,7 @@
                                 <div class="tp-bgimg defaultimg" data-lazyload="undefined" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" data-lazydone="undefined" 
                                 src="{{ asset('Frontend/image/slide/'.$slide->image) }}" data-src="{{ asset('Frontend/image/slide/'.$slide->image) }}" 
                                 style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; 
-                                    background-image: url('Frontend/assets/dest/images/thumbs/1.jpg'); 
+                                    background-image: url('{{ asset('Frontend/image/slide/'.$slide->image) }}'); 
                                     background-size: cover; 
                                     background-position: center center; 
                                     width: 100%; 

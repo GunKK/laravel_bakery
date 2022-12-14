@@ -77,11 +77,11 @@
                                     </div>
                                 </div>
                             </div>
-                            
+            
                             <div class="cart-caption">
                                 <div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">$34.55</span></div>
                                 <div class="clearfix"></div>
-
+    
                                 <div class="center">
                                     <div class="space10">&nbsp;</div>
                                     <a href="checkout.html" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
@@ -100,16 +100,16 @@
             <div class="visible-xs clearfix"></div>
             <nav class="main-menu">
                 <ul class="l-inline ov">
-                    <li><a href="{{ route('home') }}" style="color:#000; font-weight: 600">Trang chủ</a></li>
-                    <li><a href="#" style="color:#000; font-weight: 600">Sản phẩm</a>
+                    <li><a href="{{ route('home') }}" style="color:#000; font-weight: 600">TRANG CHỦ</a></li>
+                    <li><a href="#" style="color:#000; font-weight: 600">SẢN PHẨM</a>
                         <ul class="sub-menu">
                             @foreach ( $productTypes as $productType )    
                                 <li><a href="{{ route('productType',['id'=>$productType->id]) }}">{{ $productType->name }}</a></li>
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="{{ route('about') }}" style="color:#000; font-weight: 600">Giới thiệu</a></li>
-                    <li><a href="{{ route('contact') }}" style="color:#000; font-weight: 600">Liên hệ</a></li>
+                    <li><a href="{{ route('about') }}" style="color:#000; font-weight: 600">VỀ CHÚNG TÔI</a></li>
+                    <li><a href="{{ route('contact') }}" style="color:#000; font-weight: 600">LIÊN HỆ</a></li>
                 </ul>
                 <div class="clearfix"></div>
             </nav>
