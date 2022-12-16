@@ -25,10 +25,19 @@
             <div class="pull-right beta-components space-left ov">
                 <div class="space10">&nbsp;</div>
                 <div class="beta-comp">
-                    <form role="search" method="get" id="searchform" action="/">
-                        <input type="text" value="" name="s" id="s" placeholder="Nhập từ khóa..." />
+                    <form role="search" method="get" id="searchform" action="{{ route('search') }}">
+                        <input type="text" value="{{ $key ?? "" }}" name="key" id="s" placeholder="Nhập từ khóa..." />
                         <button class="fa fa-search" type="submit" id="searchsubmit"></button>
                     </form>
+                    @if ($errors->any())
+                        <div class="alert alert-danger" style="margin-top:12px">
+                            <div>
+                                @foreach ($errors->all() as $error)
+                                    <span><i class="fa-solid fa-exclamation"></i> {{ $error }}</span>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="beta-comp">

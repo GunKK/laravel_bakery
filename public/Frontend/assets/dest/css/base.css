@@ -6,7 +6,7 @@
   z-index: 100000000;
 }
 .cart-body{
-	z-index: 10;
+	z-index: 1000000;
   max-height: 50vh;
   overflow-y: scroll;
 }

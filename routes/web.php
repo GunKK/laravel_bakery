@@ -24,3 +24,4 @@ Route::get('/about', [PageController::class, 'getAbout'])->name('about');
 Route::get('/contact', [PageController::class, 'getContact'])->name('contact');
 Route::get('/login', [PageController::class, 'getLogin'])->name('login');
 Route::get('/signup', [PageController::class, 'getSignUp'])->name('signup');
+Route::get('/search', [PageController::class, 'getSearch'])->name('search');

@@ -1,5 +1,5 @@
 @extends('Frontend.Layouts.master')
-@section('title', 'productType')
+@section('title', 'search')
 @section('content')
 <div class="container">
 	<div id="content" class="space-top-none">
@@ -16,14 +16,32 @@
 				</div>
 				<div class="col-sm-9">
 					<div class="beta-products-list">
-						<h4>{{ $productTypeFind->name }}</h4>
+						<h4>Từ khóa: <span class="text-primary">{{ $key }}</span></h4>
 						<div class="beta-products-details">
-							<p class="pull-left"><span class="text-primary"><b>{{ $productTypeFind->product->count() }}</b></span> kết quả được tìm thấy</p>
+							<p class="pull-left"><span class="text-primary"><b>{{ $count }}</b></span> kết quả được tìm thấy</p>
 							<div class="clearfix"></div>
 						</div>
-
+						@if ($count==0)
+							<div class="row">
+								<div class="alert alert-warning" role="alert">
+									<i class="fa-light fa-circle-exclamation"></i>
+									Rất tiếc, <strong>Bakery shop</strong> không tìm thấy kết quả nào phù hợp với từ khóa "{{ $key }}"
+								</div>
+								<div class="d-flex justify-content-center">
+									<div>
+										<h6>Để tìm được kết quả chính xác hơn, bạn vui lòng:</h6>
+										<ul>
+											<li>Kiểm tra lỗi chính tả của từ khóa đã nhập</li>
+											<li>Thử lại bằng từ khóa khác</li>
+											<li>Thử lại bằng những từ khóa tổng quát hơn</li>
+											<li>Thử lại bằng những từ khóa ngắn gọn hơn</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						@else
 						<div class="row">
-							@foreach ( $productTypeFind->product as $product )
+							@foreach ( $products as $product )
 								<div class="col-sm-4">
 									<div class="single-item">
 										@if ($product->promotion_price != 0)
@@ -57,6 +75,10 @@
 								</div>
 							@endforeach
 						</div>
+						<div style="text-align:center">
+							{{ $products->appends(Request::all())->links() }}
+                        </div>
+						@endif
 					</div> 
 					<!-- .beta-products-list -->
 
