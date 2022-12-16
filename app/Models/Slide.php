@@ -9,4 +9,5 @@ class Slide extends Model
 {
     use HasFactory;
     protected $table = 'slide';
+    public $timestamps = false;
 }
