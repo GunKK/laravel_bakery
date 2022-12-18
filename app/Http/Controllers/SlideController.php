@@ -23,16 +23,16 @@ class SlideController extends Controller
             $file = $req->file('image');
             $ext = $file->getClientOriginalExtension();
             if ($ext != 'jpg' && $ext != 'png' && $ext != 'jpeg') {
-                return redirect()->route('addSlide')->with('Error', 'Phần mở rộng file ảnh chỉ gồm jpg, png, jpeg');
+                return redirect()->route('addSlide')->with('error', 'Phần mở rộng file ảnh chỉ gồm jpg, png, jpeg');
             }
             $fileName = time().'.'.$file->getClientOriginalExtension();
             $file->move(public_path('Frontend/image/slide/'), $fileName);
             $slide->link = $fileName;
             $slide->image = $fileName;
             $slide->save();
-            return redirect()->route('slide')->with("notify", "Thêm mới thành công");
+            return redirect()->route('manageSlide')->with("notify", "Thêm mới thành công");
         } else {
-            return redirect()->route('addSlide')->with('Error','Lỗi file ảnh');
+            return redirect()->route('addSlide')->with('error','Lỗi file ảnh');
         }
     }
 
@@ -61,7 +61,7 @@ class SlideController extends Controller
             $slide->link = $fileName;
             $slide->image = $fileName;
             $slide->save();
-            return redirect()->route('slide')->with("notify", "Cập nhật thành công");
+            return redirect()->route('manageSlide')->with("notify", "Cập nhật thành công");
         } else {
             return redirect()->route('updateSlide',['id'=>$id])->with('error','Lỗi file ảnh');
         }
@@ -73,6 +73,7 @@ class SlideController extends Controller
         if (File::exists($imgPath)) {
             File::delete($imgPath);
         }
-        return redirect()->route('slide')->with('notify','Xóa thành công');
+        $slide->delete();
+        return redirect()->route('manageSlide')->with('notify','Xóa thành công');
     }
 }

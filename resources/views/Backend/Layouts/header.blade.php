@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">Admin Area - Trung Tâm</a>
+        <a class="navbar-brand" href="index.html">Quản lý cửa hàng</a>
     </div>
     <!-- /.navbar-header -->
 

@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $table = 'products';
+    public $timestamps = false;
 
     public function productType() {
         return $this->belongsTo(Product_type::class, 'id_type', 'id');

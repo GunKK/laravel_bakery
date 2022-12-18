@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SlideController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 use function PHPUnit\Framework\returnSelf;
@@ -29,11 +30,20 @@ Route::get('/search', [PageController::class, 'getSearch'])->name('search');
 
 Route::group(['prefix'=>'admin'], function(){
     Route::group(['prefix'=>'slide'], function(){
-        Route::get('/', [SlideController::class, 'index'])->name('slide');
+        Route::get('/', [SlideController::class, 'index'])->name('manageSlide');
         Route::get('/add', [SlideController::class, 'create'])->name('addSlide');
         Route::post('/add', [SlideController::class, 'store']);
         Route::get('/update/{id}', [SlideController::class, 'edit'])->name('updateSlide');
         Route::post('/update/{id}', [SlideController::class, 'update']);
         Route::get('/delete/{id}', [SlideController::class, 'destroy'])->name('deleteSlide');
+    });
+    Route::group(['prefix'=>'product'], function(){
+        Route::get('/', [ProductController::class, 'index'])->name('manageProduct');
+        Route::get('/add', [ProductController::class, 'create'])->name('addProduct');
+        Route::get('/show/{id}', [ProductController::class, 'show'])->name('showProduct');
+        Route::post('/add', [ProductController::class, 'store']);
+        Route::get('/update/{id}', [ProductController::class, 'edit'])->name('updateProduct');
+        Route::post('/update/{id}', [ProductController::class, 'update']);
+        Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('deleteProduct');
     });
 });

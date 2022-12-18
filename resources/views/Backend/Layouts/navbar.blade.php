@@ -31,10 +31,22 @@
                 <a href="#"><i class="fa fa-cube fa-fw"></i> Product<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">List Product</a>
+                        <a href="{{ route('manageProduct') }}">List Product</a>
                     </li>
                     <li>
-                        <a href="#">Add Product</a>
+                        <a href="{{ route('addProduct') }}">Add Product</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-cube fa-fw"></i> Slide<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ route('manageSlide') }}">List Product</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('addSlide') }}">Add Product</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
