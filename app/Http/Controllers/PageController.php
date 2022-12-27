@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Product_type;
 use Illuminate\Auth\Events\Validated;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -70,5 +71,4 @@ class PageController extends Controller
     {
         return view('Frontend.Pages.signup');
     }
-
 }

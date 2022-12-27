@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>@yield('title') </title>
 	<!-- CSS only -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -46,7 +47,9 @@
 	<script src="{{ asset('Frontend/assets/dest/js/wow.min.js') }}"></script>
 	<!--customjs-->
 	<script src="{{ asset('Frontend/assets/dest/js/custom2.js') }}"></script>
-	<script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+	
+<script>
 	$(document).ready(function($) {    
 		$(window).scroll(function(){
 			if($(this).scrollTop()>150){
@@ -55,7 +58,16 @@
 				$(".header-bottom").removeClass('fixNav')
 			}}
 		)
-	})
-	</script>
+	});
+
+	$(document).ready(function() {
+		toastr.options.timeOut = 10000;
+		@if (session()->has('error'))
+			toastr.error('{{ Session::get('error') }}');
+		@elseif(session()->has('success'))
+			toastr.success('{{ Session::get('success') }}');
+		@endif
+	});
+</script>
 </body>
 </html>

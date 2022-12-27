@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductTypeController;
 use Illuminate\Support\Facades\Route;
 
 use function PHPUnit\Framework\returnSelf;
@@ -27,6 +29,9 @@ Route::get('/contact', [PageController::class, 'getContact'])->name('contact');
 Route::get('/login', [PageController::class, 'getLogin'])->name('login');
 Route::get('/signup', [PageController::class, 'getSignUp'])->name('signup');
 Route::get('/search', [PageController::class, 'getSearch'])->name('search');
+Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('addToCart');
+Route::get('/cart/delete/{id}', [CartController::class, 'destroy'])->name('deleteCart');
+Route::get('/cart/update/{$action}/{id}', [CartController::class, 'update'])->name('updateCart');
 
 Route::group(['prefix'=>'admin'], function(){
     Route::group(['prefix'=>'slide'], function(){
@@ -45,5 +50,14 @@ Route::group(['prefix'=>'admin'], function(){
         Route::get('/update/{id}', [ProductController::class, 'edit'])->name('updateProduct');
         Route::post('/update/{id}', [ProductController::class, 'update']);
         Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('deleteProduct');
+    });
+    Route::group(['prefix'=>'productType'], function(){
+        Route::get('/', [ProductTypeController::class, 'index'])->name('manageProductType');
+        Route::get('/add', [ProductTypeController::class, 'create'])->name('addProductType');
+        Route::get('/show/{id}', [ProductTypeController::class, 'show'])->name('showProductType');
+        Route::post('/add', [ProductTypeController::class, 'store']);
+        Route::get('/update/{id}', [ProductTypeController::class, 'edit'])->name('updateProductType');
+        Route::post('/update/{id}', [ProductTypeController::class, 'update']);
+        Route::get('/delete/{id}', [ProductTypeController::class, 'destroy'])->name('deleteProductType');
     });
 });
