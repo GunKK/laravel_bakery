@@ -32,6 +32,7 @@ Route::get('/search', [PageController::class, 'getSearch'])->name('search');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('addToCart');
 Route::get('/cart/delete/{id}', [CartController::class, 'destroy'])->name('deleteCart');
 Route::get('/cart/update/{$action}/{id}', [CartController::class, 'update'])->name('updateCart');
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
 
 Route::group(['prefix'=>'admin'], function(){
     Route::group(['prefix'=>'slide'], function(){

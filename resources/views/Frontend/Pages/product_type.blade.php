@@ -6,7 +6,24 @@
 		<div class="main-content">
 			<div class="space60">&nbsp;</div>
 			<div class="row">
-				<div class="col-sm-3">
+				{{-- <div class="col-auto px-0 d-none d-sm-block d-md-none">
+					<div id="sidebar" class="collapse collapse-horizontal show border-end">
+						<div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+							<a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Item</span> </a>
+							<a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-film"></i> <span>Item</span></a>
+							<a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-heart"></i> <span>Item</span></a>
+							<a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-bricks"></i> <span>Item</span></a>
+							<a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-clock"></i> <span>Item</span></a>
+							<a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-archive"></i> <span>Item</span></a>
+							<a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-gear"></i> <span>Item</span></a>
+							<a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-calendar"></i> <span>Item</span></a>
+							<a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-envelope"></i> <span>Item</span></a>
+						</div>
+					</div>
+				</div> --}}
+
+				{{-- d-xl-block d-md-block d-none --}}
+				<div class="col-xl-3 col-md-3">
 					<ul class="aside-menu">
 						<li><span class="text-primary"><b>DANH MỤC SẢN PHẨM</b></span></li>
 						@foreach ( $productTypes as $productType )	
@@ -14,8 +31,11 @@
 						@endforeach
 					</ul>
 				</div>
-				<div class="col-sm-9">
+				<div class="col-xl-9 col-md-9">
 					<div class="beta-products-list">
+						{{-- <div class="d-none d-sm-block d-md-none">
+							<a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i> Menu</a>
+						</div> --}}
 						<h4>{{ $productTypeFind->name }}</h4>
 						<div class="beta-products-details">
 							<p class="pull-left"><span class="text-primary"><b>{{ $productTypeFind->product->count() }}</b></span> kết quả được tìm thấy</p>
@@ -31,7 +51,7 @@
                                         @endif
 										<div class="single-item-header">
 											<a href="{{ route('product', ['id'=>$product->id]) }}">
-												<img style="height: 200px" class="img-fluid rounded"  src="{{ asset('Frontend/image/products/'.$product->image) }}" alt="{{ $product->image }}">
+												<img style="height: 250px" width="250px" class="rounded"  src="{{ asset('Frontend/image/products/'.$product->image) }}" alt="{{ $product->image }}">
 											</a>
 										</div>
 										<div class="single-item-body">

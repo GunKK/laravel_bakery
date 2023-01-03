@@ -60,7 +60,7 @@
 									<option value="4">4</option>
 									<option value="5">5</option>
 								</select>
-								<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
+								<a class="add-to-cart" href="{{ route('addToCart', ['id'=>$product->id]) }}"><i class="fa fa-shopping-cart"></i></a>
 								<div class="clearfix"></div>
 							</div>
 						</div>

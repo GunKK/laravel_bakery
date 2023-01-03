@@ -49,25 +49,25 @@
 	<script src="{{ asset('Frontend/assets/dest/js/custom2.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 	
-<script>
-	$(document).ready(function($) {    
-		$(window).scroll(function(){
-			if($(this).scrollTop()>150){
-			$(".header-bottom").addClass('fixNav')
-			}else{
-				$(".header-bottom").removeClass('fixNav')
-			}}
-		)
-	});
+	<script>
+		$(document).ready(function($) {    
+			$(window).scroll(function(){
+				if($(this).scrollTop()>150){
+				$(".header-bottom").addClass('fixNav')
+				}else{
+					$(".header-bottom").removeClass('fixNav')
+				}}
+			)
+		});
 
-	$(document).ready(function() {
-		toastr.options.timeOut = 10000;
-		@if (session()->has('error'))
-			toastr.error('{{ Session::get('error') }}');
-		@elseif(session()->has('success'))
-			toastr.success('{{ Session::get('success') }}');
-		@endif
-	});
-</script>
+		// $(document).ready(function() {
+		// 	toastr.options.timeOut = 10000;
+		// 	@if (session()->has('error'))
+		// 		toastr.error('{{ Session::get('error') }}');
+		// 	@elseif(session()->has('success'))
+		// 		toastr.success('{{ Session::get('success') }}');
+		// 	@endif
+		// });
+	</script>
 </body>
 </html>
