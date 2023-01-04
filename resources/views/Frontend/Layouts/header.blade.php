@@ -1,6 +1,6 @@
 <div id="header">
      {{-- nav-mobile --}}
-     <nav class="navbar bg-light fixed-top d-xl-none d-sm-block d-md-none">
+     <nav class="navbar bg-light d-xl-none d-sm-block d-md-none fixNav nav-mobile">
         <div class="container-fluid">
             <div class="pull-left">
                 <a href="{{ route('home') }}" id="logo"><img src="{{ asset('Frontend/assets/dest/images/logo-cake.png') }}" width="200px" alt=""></a>
@@ -10,22 +10,22 @@
             </button>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Cửa hàng bán bánh</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img src="{{ asset('Frontend/assets/dest/images/logo-cake.png') }}" width="200px" alt=""></h5>
+                <button type="button" class="btn-close me-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 ps-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Trang chủ</a>
+                        <a class="nav-link-mobile nav-link active" aria-current="page" href="{{ route('home') }}">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('about') }}">Về chúng tôi</a>
+                        <a class="nav-link-mobile nav-link" href="{{ route('about') }}">Về chúng tôi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contact') }}">Liên hệ</a>
+                        <a class="nav-link-mobile nav-link" href="{{ route('contact') }}">Liên hệ</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link-mobile nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Sản phẩm
                         </a>
                         <ul class="dropdown-menu">
@@ -39,10 +39,10 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Đăng nhập</a>
+                        <a class="nav-link-mobile nav-link active" aria-current="page" href="{{ route('login') }}">Đăng nhập</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('signup') }}">Đăng kí</a>
+                        <a class="nav-link-mobile nav-link active" aria-current="page" href="{{ route('signup') }}">Đăng kí</a>
                     </li>
                 </ul>
             </div>
@@ -67,9 +67,9 @@
             <div class="clearfix"></div>
         </div> <!-- .container -->
     </div> <!-- .header-top -->
-    <div class="header-body  d-xl-block d-md-block d-none">
+    <div class="header-body mb-4 mt-5">
         <div class="container beta-relative">
-            <div class="pull-left">
+            <div class="pull-left  d-xl-block d-md-block d-none">
                 <a href="{{ route('home') }}" id="logo"><img src="{{ asset('Frontend/assets/dest/images/logo-cake.png') }}" width="200px" alt=""></a>
             </div>
             <div class="pull-right beta-components space-left ov">
@@ -118,7 +118,7 @@
                                     @endforeach
                                 </div>
                                 <div class="cart-caption">
-                                    <div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">đ {{ number_format($totalPrice) }}</span></div>
+                                    <div class="cart-total text-right pe-3">Tổng tiền: <span class="cart-total-value">đ {{ number_format($totalPrice) }}</span></div>
                                     <div class="clearfix"></div>
         
                                     <div class="center">

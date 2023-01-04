@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         $slides = Slide::all();
         $productTypes = Product_type::all();
 
-        view()->composer(['Frontend.Layouts.header', 'Frontend.Pages.shopping_cart'], function($view) {
+        view()->composer(['Frontend.Layouts.header', 'Frontend.Pages.shopping_cart', 'Frontend.Pages.checkout'], function($view) {
             if (Session::has('cart')) {
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);

@@ -10,6 +10,7 @@
 				<table class="shop_table beta-shopping-cart-table table">
 					<thead>
 						<tr>
+							<th>STT</th>
 							<th class="product-name">Sản phẩm</th>
 							<th class="product-price">Đơn giá</th>
 							{{-- <th class="product-status">Status</th> --}}
@@ -19,15 +20,23 @@
 						</tr>
 					</thead>
 					<tbody>
-							@foreach ( $cart->items as $item )	
+						@php
+							$i=1
+						@endphp
+						@foreach ( $cart->items as $item )	
 							<tr class="cart_item">
+								<td>
+									@php
+										echo $i
+									@endphp
+								</td>
 								<td class="product-name">
 									<div class="media">
-										<img class="pull-left" src="assets/dest/images/shoping1.jpg" alt="">
+										{{-- <img class="pull-left" src="assets/dest/images/shoping1.jpg" alt=""> --}}
 										<div class="media-body">
 											<p class="font-large table-title">{{ $item['item']->name }}</p>
-											<p class="table-option">Color: Red</p>
-											<p class="table-option">Size: M</p>
+											{{-- <p class="table-option">Color: Red</p> --}}
+											{{-- <p class="table-option">Size: M</p> --}}
 											{{-- <a class="table-edit" href="#">Edit</a> --}}
 										</div>
 									</div>
@@ -64,7 +73,10 @@
 									<a href="{{ route('deleteCart', ['id'=>$item['item']->id]) }}" class="remove" title="Remove this item"><i class="fa fa-trash-o"></i></a>
 								</td>
 							</tr>
-							@endforeach
+							@php
+								$i++
+							@endphp
+						@endforeach
 					</tbody>
 
 					<tfoot>
