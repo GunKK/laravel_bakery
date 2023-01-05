@@ -9,6 +9,7 @@ class Customer extends Model
 {
     use HasFactory;
     protected $table = 'customer';
+    // public $timestamps = false;
 
     public function bill() {
         return $this->hasMany(Bill::class, 'id_customer', 'id');

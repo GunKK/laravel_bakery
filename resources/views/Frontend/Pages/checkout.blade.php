@@ -23,7 +23,7 @@
 
 						<div class="form-block">
 							<label for="phone">Điện thoại:</label>
-							<input type="text" id="phone" required>
+							<input type="tel" id="phone" required>
 						</div>
 						
 						<div class="form-block">

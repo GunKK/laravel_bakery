@@ -61,14 +61,4 @@ class PageController extends Controller
     {
         return view('Frontend.Pages.contact');
     }
-
-    public function getLogin() 
-    {
-        return view('Frontend.Pages.login');
-    }
-
-    public function getSignUp() 
-    {
-        return view('Frontend.Pages.signup');
-    }
 }

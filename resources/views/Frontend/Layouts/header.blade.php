@@ -38,12 +38,24 @@
                             <li><a class="dropdown-item disabled" href="#">More</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link-mobile nav-link active" aria-current="page" href="{{ route('login') }}">Đăng nhập</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link-mobile nav-link active" aria-current="page" href="{{ route('signup') }}">Đăng kí</a>
-                    </li>
+                    @if (Auth()->check()) 
+                        <li class="nav-item">
+                            <a class="nav-link-mobile nav-link active" aria-current="page" href="#">
+                                <i class="fa-light fa-user"></i>
+                                {{ Auth::user()->name }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-mobile nav-link active" aria-current="page" href="#">Đăng xuất</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link-mobile nav-link active" aria-current="page" href="{{ route('login') }}">Đăng nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-mobile nav-link active" aria-current="page" href="{{ route('signup') }}">Đăng kí</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
             </div>

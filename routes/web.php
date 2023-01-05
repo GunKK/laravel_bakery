@@ -27,8 +27,11 @@ Route::get('/product_type/{id}', [PageController::class, 'getProductType'])->nam
 Route::get('/product/{id}', [PageController::class, 'getProduct'])->name('product');
 Route::get('/about', [PageController::class, 'getAbout'])->name('about');
 Route::get('/contact', [PageController::class, 'getContact'])->name('contact');
-Route::get('/login', [PageController::class, 'getLogin'])->name('login');
-Route::get('/signup', [PageController::class, 'getSignUp'])->name('signup');
+Route::get('/login', [CustomerController::class, 'getLogin'])->name('login');
+Route::post('/login', [CustomerController::class, 'postLogin']);
+Route::get('/signup', [CustomerController::class, 'getSignUp'])->name('signup');
+Route::post('/signup', [CustomerController::class, 'postSignUp']);
+Route::get('/logout', [CustomerController::class, 'logout'])->name('logout');
 Route::get('/search', [PageController::class, 'getSearch'])->name('search');
 Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('addToCart');
 Route::get('/cart/delete/{id}', [CartController::class, 'destroy'])->name('deleteCart');
