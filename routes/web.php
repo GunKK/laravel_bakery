@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SlideController;
@@ -42,7 +43,14 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/checkout', [PageController::class, 'getCheckout'])->name('checkout');
 Route::post('/checkout', [PageController::class, 'postCheckout']);
 
-Route::group(['prefix'=>'admin'], function(){
+Route::get('/admin/login', [AdminController::class, 'getLogin'])->name('loginAdmin');
+Route::post('/admin/login', [AdminController::class, 'postLogin']);
+Route::get('/admin/logout', [AdminController::class, 'logout'])->name('logoutAdmin');
+
+
+Route::group(['prefix'=>'admin', 'middleware' => 'isAdmin'], function(){
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::post('/', [AdminController::class, 'changePassword']);
     Route::group(['prefix'=>'slide'], function(){
         Route::get('/', [SlideController::class, 'index'])->name('manageSlide');
         Route::get('/add', [SlideController::class, 'create'])->name('addSlide');

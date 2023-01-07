@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -85,7 +86,7 @@ class CustomerController extends Controller
         $user->email = $val['email'];
         $user->full_name = $val['name'];
         $user->phone = $val['phone'];
-        $user->password = bcrypt($val['password']);
+        $user->password = Hash::make($val['password']);
         $user->address = $req->address;
         $user->save();
         return redirect()->route('login')->with('success', 'Đăng kí thành công, vui lòng đăng nhập lại !');
