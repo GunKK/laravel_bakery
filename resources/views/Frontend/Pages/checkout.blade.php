@@ -5,6 +5,7 @@
 		<div id="content">
 			
 			<form action="{{ url()->current() }}" method="post" class="beta-form-checkout">
+				@csrf
 				<div class="row">
 					<div class="col-sm-6">
 						<h4>Đặt hàng</h4>
@@ -12,23 +13,28 @@
 
 						<div class="form-block">
 							<label for="name">Họ tên:</label>
-							<input type="text" id="name" placeholder="Họ tên" required>
+							<input type="text" id="name" name="name" placeholder="Họ tên" required>
+						</div>
+
+						<div class="form-block">
+							<label for="name">Địa chỉ email:</label>
+							<input type="email" id="email" name="email" placeholder="Email" required>
 						</div>
 
 						<div class="form-block">
 							<label for="adress">Địa chỉ:</label>
-							<input type="text" id="adress" placeholder="Street Address" required>
+							<input type="text" id="adress" name="address" placeholder="Street Address" required>
 						</div>
 						
 
 						<div class="form-block">
 							<label for="phone">Điện thoại:</label>
-							<input type="tel" id="phone" required>
+							<input type="tel" id="phone" name="phone" required>
 						</div>
 						
 						<div class="form-block">
 							<label for="notes">Ghi chú</label>
-							<textarea id="notes"></textarea>
+							<textarea name="note" id="notes"></textarea>
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -62,6 +68,7 @@
 								<div class="your-order-item">
 									<div class="pull-left"><p class="your-order-f18">Tổng tiền (đã gồm VAT):</p></div>
 									<div class="pull-right"><h6 class="color-black"><strong>{{ number_format($totalPrice) }} đ</strong></h6></div>
+									<input type="hidden" name="total" value="{{ $totalPrice }}">
 									<div class="clearfix"></div>
 								</div>
 							</div>
@@ -91,7 +98,12 @@
 								</ul>
 							</div>
 
-							<div class="text-center"><a class="beta-btn primary" href="#">Đặt hàng <i class="fa fa-chevron-right"></i></a></div>
+							<div class="text-center">
+								<button class="beta-btn primary" type="submit">
+									Đặt hàng
+									<i class="fa fa-chevron-right"></i>
+								</button>
+							</div>
 						</div> <!-- .your-order -->
 					</div>
 				</div>

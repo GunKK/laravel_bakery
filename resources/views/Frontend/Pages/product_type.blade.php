@@ -50,8 +50,8 @@
                                         <div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
                                         @endif
 										<div class="single-item-header">
-											<a href="{{ route('product', ['id'=>$product->id]) }}">
-												<img style="height: 250px" width="250px" class="rounded"  src="{{ asset('Frontend/image/products/'.$product->image) }}" alt="{{ $product->image }}">
+											<a href="{{ route('product', ['id'=>$product->id]) }}" class="d-block">
+												<img style="height: 250px" class="img-fluid"  src="{{ asset('Frontend/image/products/'.$product->image) }}" alt="{{ $product->image }}">
 											</a>
 										</div>
 										<div class="single-item-body">
@@ -69,7 +69,7 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="add-to-cart pull-left" href="{{ route('addToCart', ['id'=>$product->id]) }}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="{{ route('product', ['id'=>$product->id]) }}">Xem chi tiết <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>

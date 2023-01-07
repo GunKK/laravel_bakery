@@ -145,7 +145,7 @@
 					<div class="cart-totals-row"><h5 class="cart-total-title">Đơn hàng gồm<span class="text-primary">{{ count($cart->items) }} sản phẩm</span> </h5></div>
 					<div class="cart-totals-row"><span>Tổng tiền (đã gồm VAT):</span> <span>{{ number_format($totalPrice) }} đ</span></div>
 					{{-- <div class="cart-totals-row"><span>Shipping:</span> <span>Free Shipping</span></div> --}}
-					<div class="cart-totals-row text-center"><a href="#" class="beta-btn primary text-center">Đặt hàng</a></div>
+					<div class="cart-totals-row text-center"><a href="{{ route('checkout') }}" class="beta-btn primary text-center">Đặt hàng</a></div>
 				</div>
 			@endif
 			<div class="clearfix"></div>

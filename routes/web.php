@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\ProductController;
@@ -37,7 +38,9 @@ Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('addToCart');
 Route::get('/cart/delete/{id}', [CartController::class, 'destroy'])->name('deleteCart');
 Route::get('/cart/update/{$action}/{id}', [CartController::class, 'update'])->name('updateCart');
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::get('/checkout', [CustomerController::class, 'checkout'])->name('checkout');
+// Route::get('/checkout', [CustomerController::class, 'checkout'])->name('checkout');
+Route::get('/checkout', [PageController::class, 'getCheckout'])->name('checkout');
+Route::post('/checkout', [PageController::class, 'postCheckout']);
 
 Route::group(['prefix'=>'admin'], function(){
     Route::group(['prefix'=>'slide'], function(){
@@ -57,6 +60,15 @@ Route::group(['prefix'=>'admin'], function(){
         Route::post('/update/{id}', [ProductController::class, 'update']);
         Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('deleteProduct');
     });
+
+    Route::group(['prefix'=>'bill'], function(){
+        Route::get('/', [BillController::class, 'index'])->name('manageBill');
+        Route::get('/show/{id}', [BillController::class, 'show'])->name('showBill');
+        Route::post('/add', [BillController::class, 'store']);
+        Route::get('/update/{id}', [BillController::class, 'update'])->name('updateBill');
+        Route::post('/update/{id}', [BillController::class, 'edit']);
+    });
+
     Route::group(['prefix'=>'productType'], function(){
         Route::get('/', [ProductTypeController::class, 'index'])->name('manageProductType');
         Route::get('/add', [ProductTypeController::class, 'create'])->name('addProductType');

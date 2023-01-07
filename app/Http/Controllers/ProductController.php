@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bill_detail;
 use App\Models\Product;
 use App\Models\Product_type;
 use Illuminate\Support\Facades\File;
@@ -131,11 +132,17 @@ class ProductController extends Controller
 
     public function destroy($id) {
         $product = Product::find($id);
-        $imgPath = "Frontend/image/products/".$product->image;
-        if (File::exists($imgPath)) {
-            File::delete($imgPath);
+        $billDetail = Bill_detail::where('id_product','=',$id)->get();
+        // echo count($billDetail);
+        if (count($billDetail) > 0) {
+            return redirect()->route('manageProduct')->with('error', 'Sản phẩm đã có người mua, không thể xóa được');
+        } else {
+            $imgPath = "Frontend/image/products/".$product->image;
+            if (File::exists($imgPath)) {
+                File::delete($imgPath);
+            }
+            $product->delete();
+            return redirect()->route('manageProduct')->with('notify', 'Xóa thành công');
         }
-        $product->delete();
-        return redirect()->route('manageProduct')->with('notify', 'Xóa thành công');
     }
 }

@@ -41,12 +41,12 @@
                     @if (Auth()->check()) 
                         <li class="nav-item">
                             <a class="nav-link-mobile nav-link active" aria-current="page" href="#">
-                                <i class="fa-light fa-user"></i>
-                                {{ Auth::user()->name }}
+                                <i class="fa fa-user"></i>
+                                {{ Auth::user()->full_name }}
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link-mobile nav-link active" aria-current="page" href="#">Đăng xuất</a>
+                            <a class="nav-link-mobile nav-link active" aria-current="page" href="{{ route('logout') }}">Đăng xuất</a>
                         </li>
                     @else
                         <li class="nav-item">
@@ -71,9 +71,13 @@
             </div>
             <div class="pull-right auto-width-right">
                 <ul class="top-details menu-beta l-inline">
-                    {{-- <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li> --}}
-                    <li><a href="{{ route('signup') }}">Đăng kí</a></li>
-                    <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                    @if (Auth::check())
+                        <li><a href="#"><i class="fa fa-user"></i>{{ Auth()->user()->full_name }}</a></li>
+                        <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
+                    @else 
+                        <li><a href="{{ route('signup') }}">Đăng kí</a></li>
+                        <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                    @endif
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -91,15 +95,6 @@
                         <input type="text" value="{{ $key ?? "" }}" name="key" id="s" placeholder="Nhập từ khóa..." />
                         <button class="fa fa-search" type="submit" id="searchsubmit"></button>
                     </form>
-                    @if ($errors->any())
-                        <div class="alert alert-danger" style="margin-top:12px">
-                            <div>
-                                @foreach ($errors->all() as $error)
-                                    <span><i class="fa-solid fa-exclamation"></i> {{ $error }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
                 </div>
 
                 <div class="beta-comp">
@@ -171,4 +166,20 @@
             </nav>
         </div> <!-- .container -->
     </div> <!-- .header-bottom -->
+    @if ($errors->any())
+        <div class="alert alert-danger mt-3 mb-3 ms-5 me-5  ">
+            <div>
+                @foreach ($errors->all() as $error)
+                    <span>! {{ $error }}</span>
+                @endforeach
+            </div>
+        </div>
+    @endif
+    @if (Session::has('success'))
+    <div class="alert alert-success mt-3 mb-3 ms-5 me-5  ">
+        <div>
+            <span>{{ Session::get('success') }}</span>
+        </div>
+    </div>
+    @endif
 </div> 

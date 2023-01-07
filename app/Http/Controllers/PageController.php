@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Customer;
+use App\Models\Bill;
+use App\Models\Bill_detail;
 use App\Models\Product_type;
-use Illuminate\Auth\Events\Validated;
-use Illuminate\Contracts\Session\Session;
+use Carbon\Carbon;
+// use Illuminate\Auth\Events\Validated;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -60,5 +64,62 @@ class PageController extends Controller
     public function getContact() 
     {
         return view('Frontend.Pages.contact');
+    }
+
+    public function getCheckout() {
+        if (Session::has('cart')) {
+            return view('Frontend.Pages.checkout');
+        } else {
+            return view('Frontend.Pages.shopping_cart');
+        }
+    }
+
+    public function postCheckout( Request $req ) {
+        $mytime = Carbon::now()->toDateTimeString();
+        $val = $req->validate(
+            [
+                'name' => 'required',
+                'email' => 'required|email',
+                'address' => 'required',
+                'phone' => 'required',
+                'payment_method' => 'required',
+            ],
+            [
+                'name.required' => 'Vui lòng nhập tên',
+                'email.required' => 'Vui lòng nhập email',
+                'email.email' => 'Email không đúng định dạng',
+                'phone.required' => 'Vui lòng nhập số điện thoại của bạn',
+                'payment_method.required' => 'Vui lòng chọn phương thức thanh toán'
+            ]
+        );
+        // dd(Session::get('cart')->items);
+        $customer = new Customer();
+        $customer->email = $val['email'];
+        $customer->name = $val['name'];
+        $customer->address = $val['address'];
+        $customer->phone_number = $val['phone'];
+        $customer->save();
+
+        $bill = new Bill();
+        $bill->id_customer = $customer->id;
+        $bill->date_order = $mytime;
+        $bill->payment_method = $val['payment_method'];
+        $bill->total = $req->total;
+        $bill->note = $req->note;
+        $bill->save();
+
+        foreach(Session::get('cart')->items as $key => $value)
+        {
+        $billDetail = new Bill_detail();
+        $billDetail->id_bill = $bill->id;
+        $billDetail->id_product = $key;
+        $billDetail->quantity = $value["qty"];
+        $billDetail->price = ($value["price"]/$value["qty"]);
+        $billDetail->save();
+        }
+
+
+        $req->session()->forget('cart');
+        return redirect()->route('checkout')->with('success', 'Thanh toán thành công');
     }
 }

@@ -52,7 +52,6 @@
                     <div class="form-group">
                         <label>Đơn vị</label>
                         <select name="unit" class="form-control">
-                            <option value=""></option>
                             <option @if ($product->unit == 'Cái')
                                 selected
                             @endif 
