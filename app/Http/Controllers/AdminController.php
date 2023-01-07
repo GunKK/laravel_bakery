@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Bill;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -39,7 +42,16 @@ class AdminController extends Controller
     }
 
     public function dashboard() {
-        return view('Backend.Admin.dashboard');
+        $countBill = Bill::all()->count();
+        $revenue = Bill::all()->sum('total');
+        $countProduct = Product::all()->count();
+        $countUser = User::where('level', '=', 1 )->count();
+        // echo $countBill.'-';
+        // echo $countProduct.'-';
+        // echo $countUser.'-';
+        // echo Bill::all()->sum('total');
+        // dd(1);
+        return view('Backend.Admin.dashboard',compact('countBill', 'countProduct', 'countUser', 'revenue'));
     }
 
     public function changePassword(Request $req, ) {

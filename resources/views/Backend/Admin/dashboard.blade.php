@@ -5,12 +5,40 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Dashboard
-                <small>Quản trị admin</small>
+                <small>Quản trị admin</small> </h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
+        <div class="row" style="margin: 24px 0px;">
+            <h1 class="page-header">Thống kê
+            <small>Quản trị admin</small> </h1>
+            <div>
+                <table class="table">
+                    <tr>
+                        <th>Khách hàng</th>
+                        <th>Sản phẩm</th>
+                        <th>Đơn hàng</th>
+                        <th>Doanh thu (triệu)</th>
+                    </tr>
+                    <tr>
+                        <td>{{ $countUser }}</td>
+                        <td>{{ $countProduct }}</td>
+                        <td>{{ $countBill }}</td>
+                        <td>
+                            @if ($revenue < 1000000)
+                                {{ number_format($revenue) }}
+                            @elseif ($revenue)
+                                {{ number_format($revenue / 1000000, 2) }} Triệu
+                            @else
+                                {{ number_format($revenue / 1000000000, 2) }} Tỉ
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <div class="row">
-            <h1>Đổi mật khẩu</h1>
+            <h1>Đổi mật khẩu <small>*đổi mật khẩu</small></h1>
             <div class="col">
                 <form action="{{ url()->current() }}" method="post">
                     @csrf
