@@ -1,4 +1,4 @@
-@extends('Frontend.Layouts.master');
+@extends('Frontend.Layouts.master')
 @section('title', 'Home')
 @section('content')    
 {{-- sldier --}}
