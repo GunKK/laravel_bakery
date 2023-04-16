@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->integer('role');
             $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('cascade');
-            $table->foreignId('shop_id')->nullable()->constrained('shops')->onDelete('cascade');
         });
     }
 

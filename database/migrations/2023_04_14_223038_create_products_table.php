@@ -20,9 +20,7 @@ return new class extends Migration
             $table->float('price_base');
             $table->float('price_sale')->nullable();
             $table->string('images');
-            $table->enum('unit', array('Box', 'Peace'));
-            $table->integer('new');
-            $table->foreignId('shop_id')->nullable()->constrained('shops')->onDelete('cascade');
+            $table->integer('active');
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
