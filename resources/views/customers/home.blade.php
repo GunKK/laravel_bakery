@@ -1,8 +1,8 @@
-@extends('customer.layouts.app')
+@extends('customers.layouts.app')
 @section('title', 'home')
 @section('content')
 <!-- ======= Hero Section ======= -->
-@include('customer.layouts.slider')
+@include('customers.layouts.slider')
 <!-- End Hero Section -->
 <main id="main">
 

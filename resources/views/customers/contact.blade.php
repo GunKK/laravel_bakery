@@ -1,4 +1,4 @@
-@extends('customer.layouts.app')
+@extends('customers.layouts.app')
 @section('title', 'contact')
 @section('content')
 <main id="main" class="mt-5">

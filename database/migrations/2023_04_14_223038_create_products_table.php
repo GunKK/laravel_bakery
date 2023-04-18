@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('price_base');
             $table->float('price_sale')->nullable();
             $table->string('images');
-            $table->integer('active');
+            $table->integer('active')->default(1);
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });

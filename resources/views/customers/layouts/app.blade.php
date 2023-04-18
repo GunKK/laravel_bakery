@@ -24,15 +24,16 @@
   <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-
+  <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/base.css') }}" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- ======= Header ======= -->
-    @include('customer.layouts.navbar')
+    @include('customers.layouts.navbar')
   <!-- End Header -->
 
   <!-- Main -->
@@ -41,7 +42,7 @@
 
   <!-- ======= Footer ======= -->
   <!-- End Footer -->
-  @include('customer.layouts.footer')
+  @include('customers.layouts.footer')
   <!-- End Footer -->
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -55,10 +56,18 @@
   <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
   <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/customer.js') }}"></script>
-
+  <script>
+    $(document).ready(function() {
+      $(".navbar-top__link").each(function() {
+          if (this.href == window.location.href) {
+              $(this).addClass("active");
+          }
+      });
+    });
+  </script>
 </body>
 
 </html>
