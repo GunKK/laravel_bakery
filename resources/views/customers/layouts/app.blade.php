@@ -56,16 +56,71 @@
   <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
   <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="{{ asset('assets/vendor/jquery/jquery-3.6.4.min.js') }}"></script>
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/customer.js') }}"></script>
+  <script src="{{ asset('assets/js/activeNav.js') }}"></script>
+
   <script>
-    $(document).ready(function() {
-      $(".navbar-top__link").each(function() {
-          if (this.href == window.location.href) {
-              $(this).addClass("active");
+    $(".add-tp-cart").click(function(){
+      e.preventDefault();
+      var ele = $(this);
+      $.ajax({
+          url: '{{ route("cart.add") }}',
+          method: "DELETE",
+          data: {
+            _token: '{{ csrf_token() }}', 
+            id: ele.attr("data-id")
+          },
+          success: function (response) {
+              window.location.reload();
+          },
+          error: function (message) {
+            throw new Error(message);
+          }
+        });
+    });
+
+    $(".update-cart").change(function (e) {
+      e.preventDefault();
+      var ele = $(this);
+      $.ajax({
+        url: '{{ route("cart.update") }}',
+        method: "PATCH",
+        data: {
+          _token: '{{ csrf_token() }}', 
+          id: ele.attr("data-id"), 
+          quantity: ele.find(".quantity").val()
+          action: ele.attr("data-action")
+          },
+          success: function (response) {
+            window.location.reload();
+          }, 
+          error: function (message) {
+            throw new Error(message);
           }
       });
+    });
+
+    $(".remove-from-cart").click(function (e) {
+      e.preventDefault();
+      var ele = $(this);
+      if(confirm("Bạn có chắc chắn muốn xóa sản phẩm này ?")) {
+        $.ajax({
+          url: '{{ route("cart.remove") }}',
+          method: "POST",
+          data: {
+            _token: '{{ csrf_token() }}', 
+            id: ele.attr("data-id")
+          },
+          success: function (response) {
+              window.location.reload();
+          },
+          error: function (message) {
+            throw new Error(message);
+          }
+        });
+      }
     });
   </script>
 </body>

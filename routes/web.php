@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\SlideController as AdminSlideController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -44,17 +45,20 @@ Route::get('/sign_up', function () {
 
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::prefix('cart')->group(function () {
+    Route::get('/', [CartController::class, 'cart'])->name('cart');    
+    Route::post('/add', [CartController::class, 'add'])->name('cart.add');    
+    Route::patch('/update', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/destroy', [CartController::class, 'remove'])->name('cart.remove');
+});
 
 Route::prefix('admin')->group(function () {
-    // Route::resource('product', AdminProductController::class)->except('show');
-    // Route::resource('slide', AdminProductController::class)->except('show');
-    // Route::resource('category', AdminProductController::class)->except('show');
     Route::prefix('product')->group(function () {
         Route::get('/', [AdminProductController::class, 'index'])->name('product.index');
         Route::get('/create', [AdminProductController::class, 'create'])->name('product.create');
         Route::post('/', [AdminProductController::class, 'store'])->name('product.store');
         Route::get('/{id}/edit', [AdminProductController::class, 'edit'])->name('product.edit');
-        Route::put('/{id}', [AdminProductController::class, 'update'])->name('product.update');
+        Route::patch('/{id}', [AdminProductController::class, 'update'])->name('product.update');
         Route::delete('/{id}', [AdminProductController::class, 'destroy'])->name('product.destroy');
     });
 
