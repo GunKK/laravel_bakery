@@ -279,8 +279,8 @@
                                 <span class="mb-3 h6">${{ $product->price_base }}</span>
                             </div>
                             <div>
-                                <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
-                                <a href="#!" class="btn btn-light border icon-hover px-2 pt-2"><i class="bi bi-heart text-danger px-1"></i></a>
+                                <button data-id="{{ $product->id }}" class="add-to-cart btn btn-primary shadow-0 me-1">Add to cart</button>
+                                <button class="btn btn-light border icon-hover px-2 pt-2"><i class="bi bi-heart text-danger px-1"></i></button>
                             </div>
                         </div>
                         </div>

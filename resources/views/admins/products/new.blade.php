@@ -39,6 +39,13 @@
                     <input type="text" class="form-control" name="images">
                   </div>
                 </div>
+
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Giá</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="price_base">
+                  </div>
+                </div>
                 
                 <div class="row mb-3">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
@@ -52,7 +59,7 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Danh mục</label>
                     <div class="col-sm-10">
-                      <select class="form-select" aria-label="Default select example">
+                      <select class="form-select" aria-label="Default select example" name="category_id">
                         <option selected>Open this select category</option>
                         @foreach ( $categories as $category )
                             <option value="{{ $category->id }}">{{ $category->name }}</option>

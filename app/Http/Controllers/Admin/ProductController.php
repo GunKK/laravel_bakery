@@ -49,7 +49,9 @@ class ProductController extends Controller
         $product->price_sale = $request->price_sale;
         $product->images = $request->images;
         $product->save();
-        return redirect()->route('product.index')->with('notify','Thêm sản phẩm thành công');
+        // return redirect()->route('product.index')->with('success','Thêm sản phẩm thành công');
+        session()->flash('success','Thêm sản phẩm thành công');
+        return redirect()->route('product.index');
     }
 
     /**
@@ -80,7 +82,7 @@ class ProductController extends Controller
         // dd($request->all());
         $product = Product::find($id);
         $product->update($request->all());
-        return redirect()->route('product.edit', ['id' => $id])->with('notify','Cập nhật sản phẩm thành công');
+        return redirect()->route('product.edit', ['id' => $id])->with('success','Cập nhật sản phẩm thành công');
     }
 
     /**
@@ -93,6 +95,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect()->route('product.index')->with('notify','Xóa sản phẩm thành công');
+        return redirect()->route('product.index')->with('success','Xóa sản phẩm thành công');
     }
 }

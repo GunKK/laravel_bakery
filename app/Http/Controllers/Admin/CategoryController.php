@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admins.categories.create');
+        return view('admins.categories.new');
     }
 
     /**
@@ -39,7 +39,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $category = Category::create($request->all());
-        return redirect()->route('category.index')->with('notify','Thêm danh mục thành công');
+        return redirect()->route('category.index')->with('success','Thêm danh mục thành công');
     }
 
     /**
@@ -65,7 +65,7 @@ class CategoryController extends Controller
     {   
         $category = Category::findOrFail($id);
         $category->update($request->all());
-        return redirect()->route('category.index')->with('notify','Cập nhật danh mục thành công');
+        return redirect()->route('category.index')->with('success','Cập nhật danh mục thành công');
     }
 
     /**
@@ -82,6 +82,6 @@ class CategoryController extends Controller
         } else {
             $category->delete();
         }
-        return redirect()->route('category.index')->with('Xóa thành công');
+        return redirect()->route('category.index')->with('success','Xóa thành công');
     }
 }

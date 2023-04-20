@@ -22,12 +22,12 @@
         </a>
         <ul id="section-category" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-            <a href="components-alerts.html">
+            <a href="{{ route('category.index') }}">
                 <i class="bi bi-circle"></i><span>Danh sách</span>
             </a>
             </li>
             <li>
-                <a href="components-accordion.html">
+                <a href="{{ route('category.create') }}l">
                     <i class="bi bi-circle"></i><span>Thêm</span>
                 </a>
             </li>
@@ -40,12 +40,12 @@
         </a>
         <ul id="section-product" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-            <a href="components-alerts.html">
+            <a href="{{ route('product.index') }}">
                 <i class="bi bi-circle"></i><span>Danh sách</span>
             </a>
             </li>
             <li>
-                <a href="components-accordion.html">
+                <a href="{{ route('product.create') }}">
                     <i class="bi bi-circle"></i><span>Thêm</span>
                 </a>
             </li>
@@ -58,12 +58,12 @@
         </a>
         <ul id="section-slide" class="nav-content collapse " data-bs-parent="#sidebar-nav">
             <li>
-            <a href="components-alerts.html">
+            <a href="{{ route('slide.index') }}">
                 <i class="bi bi-circle"></i><span>Danh sách</span>
             </a>
             </li>
             <li>
-                <a href="components-accordion.html">
+                <a href="{{ route('slide.create') }}">
                     <i class="bi bi-circle"></i><span>Thêm</span>
                 </a>
             </li>

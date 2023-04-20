@@ -8,8 +8,8 @@
       <h1>Form Elements</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Product</li>
+          <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('category.index') }}">Category</a></li>
           <li class="breadcrumb-item active">Create</li>
         </ol>
       </nav>
@@ -32,34 +32,15 @@
                     <input type="text" class="form-control" name="name">
                   </div>
                 </div>
-
-                <div class="row mb-3">
-                  <label for="inputEmail" class="col-sm-2 col-form-label">Link image</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" name="images">
-                  </div>
-                </div>
                 
                 <div class="row mb-3">
-                    <label for="inputEmail" class="col-sm-2 col-form-label">Mô tả sản phẩm</label>
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Mô tả</label>
                     <textarea class="tinymce-editor" name="description">
                         <p>Mô tả sản phẩm</p>
                         <p>Bánh trái cây <strong>100%</strong> từ thiên nhiên, không chất bảo quản</p>
                     </textarea><!-- End TinyMCE Editor -->
                 </div>
                 <!-- TinyMCE Editor -->
-
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Danh mục</label>
-                    <div class="col-sm-10">
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select category</option>
-                        @foreach ( $categories as $category )
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                </div>
 
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Submit Button</label>

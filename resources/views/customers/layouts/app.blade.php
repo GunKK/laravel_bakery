@@ -24,6 +24,7 @@
   <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
@@ -57,67 +58,83 @@
   <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
   <script src="{{ asset('assets/vendor/jquery/jquery-3.6.4.min.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/customer.js') }}"></script>
   <script src="{{ asset('assets/js/activeNav.js') }}"></script>
 
+  @if ($errors->any())
+    <script>
+      toastr.error('{{ $errors->first() }}');
+    </script>
+  @endif
+
+  @if (Session::has('success'))
+    <script>
+      toastr.success("{{ Session::get('success') }}");
+    </script>
+  @endif
+  
   <script>
-    $(".add-tp-cart").click(function(){
+    $(".add-to-cart").click(function(e){
       e.preventDefault();
-      var ele = $(this);
       $.ajax({
           url: '{{ route("cart.add") }}',
-          method: "DELETE",
+          method: "POST",
           data: {
             _token: '{{ csrf_token() }}', 
-            id: ele.attr("data-id")
+            id: $(this).attr("data-id")
           },
           success: function (response) {
-              window.location.reload();
+            toastr.success('Thêm sản phẩm thành công');
+            // window.location.reload();
+              // console.log(response);
           },
           error: function (message) {
-            throw new Error(message);
+            var errors = message.responseJSON;
+            console.log(errors);
           }
         });
     });
 
     $(".update-cart").change(function (e) {
       e.preventDefault();
-      var ele = $(this);
       $.ajax({
         url: '{{ route("cart.update") }}',
         method: "PATCH",
         data: {
           _token: '{{ csrf_token() }}', 
-          id: ele.attr("data-id"), 
-          quantity: ele.find(".quantity").val()
-          action: ele.attr("data-action")
+          id: $(this).attr("data-id"), 
+          action: $(this).attr("data-action")
           },
           success: function (response) {
+            toastr.success('Cập nhật giỏ hàng thành công');
             window.location.reload();
           }, 
           error: function (message) {
-            throw new Error(message);
+            var errors = message.responseJSON;
+            console.log(errors);
           }
       });
     });
 
     $(".remove-from-cart").click(function (e) {
       e.preventDefault();
-      var ele = $(this);
       if(confirm("Bạn có chắc chắn muốn xóa sản phẩm này ?")) {
         $.ajax({
           url: '{{ route("cart.remove") }}',
-          method: "POST",
+          method: "DELETE",
           data: {
             _token: '{{ csrf_token() }}', 
-            id: ele.attr("data-id")
+            id: $(this).attr("data-id")
           },
           success: function (response) {
-              window.location.reload();
+            toastr.success('Xóa sản phẩm thành công');
+            window.location.reload();
           },
           error: function (message) {
-            throw new Error(message);
+            var errors = message.responseJSON;
+            console.log(errors);
           }
         });
       }

@@ -38,7 +38,7 @@ class SlideController extends Controller
     public function store(Request $request)
     {
         $slide = Slide::create($request->all());
-        return view()->route('$slide.index')->with('notify', 'Thêm slide thành công');
+        return redirect()->route('slide.index')->with('success', 'Thêm slide thành công');
     }
 
     /**
@@ -62,7 +62,7 @@ class SlideController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return view()->route('slide.index')->with('notify','Cập nhật thành công');
+        return redirect()->route('slide.index')->with('success','Cập nhật thành công');
     }
 
     /**
@@ -75,6 +75,6 @@ class SlideController extends Controller
     {
         $slide = Slide::find($id);
         $slide->delete();
-        return view()->route('slide.index')->with('notify', 'Đã xóa thành công');
+        return redirect()->route('slide.index')->with('success', 'Đã xóa thành công');
     }
 }

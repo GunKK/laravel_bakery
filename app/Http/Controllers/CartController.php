@@ -11,7 +11,8 @@ class CartController extends Controller
         return view('customers.cart');
     }
 
-    public function add($id) {
+    public function add(Request $request) {
+        $id = $request->id;
         $product = Product::findOrFail($id);
 
         $cart = session()->get('cart', []);
@@ -22,12 +23,13 @@ class CartController extends Controller
             $cart[$id] = [
                 "name" => $product->name,
                 "quantity" => 1,
-                "price" => $product->price,
+                "price" => $product->price_base,
                 "image" => $product->images
             ];
 
             session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
+            $cart = session()->get('cart');
+            return response()->json($cart);
         }
           
         session()->put('cart', $cart);
