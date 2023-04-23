@@ -19,38 +19,16 @@
           <li><a class="navbar-top__link" href="{{ route('contact') }}">Contact</a></li>
 
           <li class="dropdown"><a class="navbar-top__link" href="#"><span>Cart <i class="bi bi-bag" class="cart-header"></i></span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            
-            @if (!Session::has('cart') || empty(Session::get('cart')))
-            {{-- cart empty --}}
-            <ul>
-                <li class="text-center">
-                  <img src="{{ asset('assets/img/cartEmpty.png') }}" alt="">
-                  <div class="text-warning"><b>Giỏ hàng trống</b></div>
-                </li>
-              </ul>
-            @else 
-            {{-- cart list --}}
-              <ul class="cart-header__wrap">
-
-                @foreach ( Session::get('cart') as $item )                
-                  <li class="cart-header__item" >
-                    <a class="cart-header__link" href="#">
-                      <div class="cart-header__item-img"><img class="rounded-circle" width="80px" height="80px" src="{{ $item['image'] }}" alt=""></div>
-                      <div class="cart-header__item-info ms-2 d-flex flex-column align-items-baseline">
-                        <div class="cart-header__item-name">{{ $item['name'] }} </div>
-                        <div class="cart-header__item-price" style="width: 100%">
-                          <div>
-                            ${{ $item['price'] }} x <small class="text-primary">{{ $item['quantity'] }}</small>
-                          </div>
-                          <div class="text-primary">Tiền: ${{ $item['price']*$item['quantity'] }}</div>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                @endforeach
-
-              </ul>
-            @endif
+            <ul id="header-cart">
+              @if (!Session::has('cart'))                
+              <li class="text-center">
+                <img src="{{ asset('assets/img/cartEmpty.png') }}" alt="">
+                <div class="text-warning"><b>Giỏ hàng trống</b></div>
+              </li>
+              @else
+                @include('customers.header_cart')
+              @endif
+            </ul>
           </li>
         </ul>
       </nav><!-- .navbar -->

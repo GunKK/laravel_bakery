@@ -14,6 +14,7 @@ class CartController extends Controller
     public function add(Request $request) {
         $id = $request->id;
         $product = Product::findOrFail($id);
+        $msg = "Đã thêm ".$product->name." thành công vào giỏ";
 
         $cart = session()->get('cart', []);
 
@@ -21,6 +22,7 @@ class CartController extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
+                "id" => $id,
                 "name" => $product->name,
                 "quantity" => 1,
                 "price" => $product->price_base,
@@ -29,33 +31,57 @@ class CartController extends Controller
 
             session()->put('cart', $cart);
             $cart = session()->get('cart');
-            return response()->json($cart);
+            return response()->json([
+                'message' => $msg,
+                'header_cart'=> view('customers.header_cart')->render()
+            ]);
         }
-          
+
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return response()->json([
+            'message' => $msg,
+            'header_cart'=> view('customers.header_cart')->render()
+        ]);
     }
 
     public function update(Request $request) {
-        $cart = session()->get('cart');
-        
-        $cart[$request->id]["quantity"] =  ($request->action == 'add')
-        ? $cart[$request->id]["quantity"]++ 
-        : $cart[$request->id]["quantity"]--;
+        $cart = session()->get('cart'); 
+        $msg = $msg = "Cập nhật ".$cart[$request->id]['name']." thành công";
+
+        if ($request->action == 'add') {
+            $cart[$request->id]["quantity"] += 1;   
+        } else {
+            $cart[$request->id]["quantity"] -= 1;
+            if ($cart[$request->id]["quantity"] == 0) {
+                unset($cart[$request->id]);
+            }
+        }
 
         session()->put('cart', $cart);
-        session()->flash('success', 'Cart updated successfully');
+
+        return response()->json([
+            'message' => $msg,
+            'header_cart'=> view('customers.header_cart')->render(),
+            'shopping_cart' => view('customers.shopping_cart')->render()
+        ]);
     }
 
     public function remove(Request $request)
     {
-        if($request->id) {
-            $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
-                unset($cart[$request->id]);
-                session()->put('cart', $cart);
-            }
-            session()->flash('success', 'Product removed successfully');
+        $cart = session()->get('cart');
+        $msg = $msg = "Đã xóa ".$cart[$request->id]['name']." khỏi giỏ";
+
+        unset($cart[$request->id]);
+        session()->put('cart', $cart);
+
+        if (sizeof(session()->get('cart')) == 0) {
+            $request->session()->forget('cart');
         }
+
+        return response()->json([
+            'message' => $msg,
+            'header_cart'=> view('customers.header_cart')->render(),
+            'shopping_cart' => view('customers.shopping_cart')->render()
+        ]);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SlideController as AdminSlideController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductController;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,8 +49,11 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 Route::prefix('cart')->group(function () {
     Route::get('/', [CartController::class, 'cart'])->name('cart');    
     Route::post('/add', [CartController::class, 'add'])->name('cart.add');    
-    Route::patch('/update', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/destroy', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/update', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/destroy', [CartController::class, 'remove'])->name('cart.remove');
+});
+Route::get('/destroy.cart', function() {
+    session()->forget('cart');
 });
 
 Route::prefix('admin')->group(function () {

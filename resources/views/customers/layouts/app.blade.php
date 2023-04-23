@@ -75,71 +75,79 @@
     </script>
   @endif
   
-  <script>
-    $(".add-to-cart").click(function(e){
-      e.preventDefault();
-      $.ajax({
-          url: '{{ route("cart.add") }}',
-          method: "POST",
-          data: {
-            _token: '{{ csrf_token() }}', 
-            id: $(this).attr("data-id")
-          },
-          success: function (response) {
-            toastr.success('Thêm sản phẩm thành công');
-            // window.location.reload();
-              // console.log(response);
-          },
-          error: function (message) {
-            var errors = message.responseJSON;
-            console.log(errors);
+    <script>
+      $(document).ready(function() {
+        $(".add-to-cart").click(function(e){
+          e.preventDefault();
+          
+          $.ajax({
+              url: '{{ route("cart.add") }}',
+              method: "POST",
+              data: {
+                _token: '{{ csrf_token() }}', 
+                id: $(this).attr("data-id")
+              },
+              success: function (response) {
+                toastr.success(response.message);;
+                $('#header-cart').html(response.header_cart);
+              },
+              error: function (message) {
+                var errors = message.responseJSON;
+                console.log(errors);
+              }
+          });
+        });
+
+        // $(".update-cart").click(function (e) {
+          $(document).on('click', '.update-cart', function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: '{{ route("cart.update") }}',
+            method: "POST",
+            data: {
+              _token: '{{ csrf_token() }}', 
+              id: $(this).attr("data-id"), 
+              action: $(this).attr("data-action")
+              },
+              success: function (response) {
+                toastr.success(response.message);;
+                $('#header-cart').html(response.header_cart);
+                $('#shopping-cart').html(response.shopping_cart);
+              }, 
+              error: function (message) {
+                var errors = message.responseJSON;
+                console.log(errors);
+              }
+          });
+        });
+
+        // $(".remove-from-cart").click(function (e) {
+          $(document).on('click', '.remove-from-cart', function(e) {
+          e.preventDefault();
+          console.log($(this));
+          if(confirm("Bạn có chắc chắn muốn xóa sản phẩm này ?")) {
+            $.ajax({
+              url: '{{ route("cart.remove") }}',
+              method: "POST",
+              data: {
+                _token: '{{ csrf_token() }}', 
+                id: $(this).attr("data-id")
+              },
+              success: function (response) {
+                toastr.success(response.message);;
+                $('#header-cart').html(response.header_cart);
+                $('#shopping-cart').html(response.shopping_cart);
+              },
+              error: function (message) {
+                var errors = message.responseJSON;
+                console.log(errors);
+              }
+          }
+          );
           }
         });
-    });
-
-    $(".update-cart").change(function (e) {
-      e.preventDefault();
-      $.ajax({
-        url: '{{ route("cart.update") }}',
-        method: "PATCH",
-        data: {
-          _token: '{{ csrf_token() }}', 
-          id: $(this).attr("data-id"), 
-          action: $(this).attr("data-action")
-          },
-          success: function (response) {
-            toastr.success('Cập nhật giỏ hàng thành công');
-            window.location.reload();
-          }, 
-          error: function (message) {
-            var errors = message.responseJSON;
-            console.log(errors);
-          }
       });
-    });
-
-    $(".remove-from-cart").click(function (e) {
-      e.preventDefault();
-      if(confirm("Bạn có chắc chắn muốn xóa sản phẩm này ?")) {
-        $.ajax({
-          url: '{{ route("cart.remove") }}',
-          method: "DELETE",
-          data: {
-            _token: '{{ csrf_token() }}', 
-            id: $(this).attr("data-id")
-          },
-          success: function (response) {
-            toastr.success('Xóa sản phẩm thành công');
-            window.location.reload();
-          },
-          error: function (message) {
-            var errors = message.responseJSON;
-            console.log(errors);
-          }
-        });
-      }
-    });
-  </script>
+    </script>
 </body>
 
 </html>
