@@ -35,10 +35,16 @@
       <nav class="navbar">
 
         <ul>
-          <li class="dropdown"><a href=# class="navbar-top__btn" ><span><i class="bi bi-person-circle"></i> Account</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href=# class="navbar-top__btn" >
+            <span><i class="bi bi-person-circle"></i> {{ (Auth()->check()) ? Auth::user()->name : 'Account' }}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="{{ route('sign_up') }}">Đăng kí</a></li>
-              <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+              @if (Auth()->check())
+                <li><a href="#">{{ Auth::user()->name }}</a></li>
+                <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
+              @else
+                <li><a href="{{ route('sign_up') }}">Đăng kí</a></li>
+                <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+              @endif
             </ul>
           </li>
         </ul>

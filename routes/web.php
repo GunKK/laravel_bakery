@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\SlideController as AdminSlideController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProductController;
@@ -36,13 +38,12 @@ Route::get('/contact', function () {
     return view('customers.contact');
 })->name('contact');
 
-Route::get('/login', function () {
-    return view('customers.login');
-})->name('login');
+Route::get('/login', [SessionController::class, 'create'])->name('login');
+Route::post('/login', [SessionController::class, 'store'])->name('login.store');
+Route::get('/logout', [SessionController::class, 'destroy'])->name('logout');
 
-Route::get('/sign_up', function () {
-    return view('customers.sign_up');
-})->name('sign_up');
+Route::get('/sign_up', [RegisterController::class, 'create'])->name('sign_up');
+Route::post('/sign_up', [RegisterController::class, 'store'])->name('sign_up.store');
 
 Route::get('/product', [ProductController::class, 'index'])->name('product');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
