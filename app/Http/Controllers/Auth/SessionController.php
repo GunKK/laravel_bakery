@@ -16,8 +16,16 @@ class SessionController extends Controller
     public function store(Request $request) 
     {
         // dd($request->all());
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return Auth::user()->role == 0 ? redirect()->route('dashboard')->with('success', 'Đăng nhặp thành công') : redirect()->route('home')->with('success', 'Đăng nhặp thành công');
+        $request->validate([
+            'email' => 'required|string|email|max:255|ends_with:gmail.com',
+            'password' => ['required'],
+        ]);
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return 
+                Auth::user()->role == 0 
+                ? redirect()->route('dashboard')->with('success', 'Đăng nhập thành công') 
+                : redirect()->route('home')->with('success', 'Đăng nhập thành công');
         } else {
             return redirect()->route('login')->with('error', 'Email hoặc mật khẩu không khớp');
         }

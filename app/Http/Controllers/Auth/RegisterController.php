@@ -19,7 +19,7 @@ class RegisterController extends Controller
         // dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|ends_with:gmail.com|unique:'.User::class,
+            'email' => 'required|string|email|max:255|ends_with:gmail.com|unique:users',
             'password' => ['required'],
         ]);
 

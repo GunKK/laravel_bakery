@@ -22,9 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', function () {
-    return view('admins.dashboard');
-})->name('dashboard');
 
 Route::get('/', function () {
     return view('customers.home');
@@ -57,7 +54,15 @@ Route::get('/destroy.cart', function() {
     session()->forget('cart');
 });
 
-Route::prefix('admin')->group(function () {
+// ----------------------CUSTOMER----------------------------------------------------------------------------------------------------- //
+// Route::middleware('web', 'checkCustomer')->prefix('admin')->group(function () {
+// });
+
+// ----------------------ADMIN----------------------------------------------------------------------------------------------------- //
+Route::middleware('web', 'checkAdmin')->prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admins.dashboard');
+    })->name('dashboard');
     Route::prefix('product')->group(function () {
         Route::get('/', [AdminProductController::class, 'index'])->name('product.index');
         Route::get('/create', [AdminProductController::class, 'create'])->name('product.create');
